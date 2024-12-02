@@ -10,10 +10,9 @@ fs.readFile('AOC_ENTRY.txt', 'utf8', (err, data) => {
     // Convertir les données en tableau de lignes
     const levels = data
         .trim()
-        .split("\n") // Divise par ligne
-        .map(line => line.trim().split(/\s+/).map(Number)); // Divise par espaces et convertit en nombres
+        .split("\n") 
+        .map(line => line.trim().split(/\s+/).map(Number)); 
 
-    // Fonction pour vérifier si une ligne est "safe"
     const isSafe = (line) => {
         let isAscending = true;
         let isDescending = true;
@@ -34,5 +33,25 @@ fs.readFile('AOC_ENTRY.txt', 'utf8', (err, data) => {
 
     const safeCount = levels.filter(isSafe).length;
 
-    console.log(`Nombre de rapports sûrs : ${safeCount}`);
+
+    //partie 2
+    const canBeMadeSafe = (line) => {
+        for (let i = 0; i < line.length; i++) {
+            const newLine = line.slice(0, i).concat(line.slice(i + 1));
+            if (isSafe(newLine)) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    // Compte le nombre de rapports sûrs
+    let safeCount2 = 0; 
+    levels.forEach(line => {
+        if (isSafe(line) || canBeMadeSafe(line)) {
+            safeCount2++;
+        }
+    });
+
+    console.log(`Nombre de rapports sûrs avec le Problem Dampener : ${safeCount2}`);
 });

@@ -31,8 +31,20 @@ function calculateTotalDistance(sortedLeftList, sortedRightList) {
 }
 
 const totalDistance = calculateTotalDistance(sortedLeftList, sortedRightList);
-console.log("totalDistance = " , totalDistance)
+
+//Part 2
+const rightListCount = {};
+rightList.forEach(num => {
+    rightListCount[num] = (rightListCount[num] || 0) + 1;
+});
+
+const similarityScore = leftList
+    .filter(num => rightListCount[num]) 
+    .map(num => num * rightListCount[num]) 
+    .reduce((total, contribution) => total + contribution, 0); 
 
 
+console.log("Similarity Score:", similarityScore);
 
 });
+

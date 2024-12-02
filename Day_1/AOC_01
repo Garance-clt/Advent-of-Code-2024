@@ -1,0 +1,38 @@
+const fs = require('fs'); // Import du module fs
+
+// Lire le fichier
+fs.readFile('AOC_ENTRY.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error("Erreur lors de la lecture du fichier :", err);
+        return;
+    }
+
+    const [leftList, rightList] = data
+    .trim()
+    .split('\n')
+    .map(line => line.trim().split(/\s+/).map(Number)) // Convertir chaque nombre en entier
+    .reduce(
+        ([left, right], [l, r]) => [[...left, l], [...right, r]], 
+        [[], []]
+    );
+
+
+// Trier les deux listes dans l'ordre croissant
+//leftList.sort((a, b) => a - b); 
+//rightList.sort((a, b) => a - b); 
+const sortedLeftList = leftList.toSorted()
+const sortedRightList = rightList.toSorted()
+
+// comparer la distance
+function calculateTotalDistance(sortedLeftList, sortedRightList) {
+    return sortedLeftList.reduce((total, current, index) => {
+        return total + Math.abs(current - sortedRightList[index]);
+    }, 0);
+}
+
+const totalDistance = calculateTotalDistance(sortedLeftList, sortedRightList);
+console.log("totalDistance = " , totalDistance)
+
+
+
+});

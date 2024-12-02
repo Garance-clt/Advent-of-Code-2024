@@ -45,7 +45,6 @@ fs.readFile('AOC_ENTRY.txt', 'utf8', (err, data) => {
         return false;
     };
 
-    // Compte le nombre de rapports sûrs
     let safeCount2 = 0; 
     levels.forEach(line => {
         if (isSafe(line) || canBeMadeSafe(line)) {

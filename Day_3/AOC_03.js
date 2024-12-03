@@ -10,6 +10,7 @@ fs.readFile('AOC_ENTRY.txt', 'utf8', (err, data) => {
     // Étape 1 : Somme des multiplications sans conditions
     const mulRegex = /mul\((\d+),(\d+)\)/g; 
     const matches = [...data.matchAll(mulRegex)]; 
+    console.log(matches)
 
     let totalSum = matches.reduce((sum, match) => {
         const a = parseInt(match[1], 10);
